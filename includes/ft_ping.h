@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 16:48:03 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/14 18:12:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int				set_socket(int is_ipv4);
 t_sockaddr		*get_sock_addr(char *addr, int port, int is_serv);
 t_sockaddr_in6	*get_ipv6_addr(char *address, int port, t_sockaddr_in6 *ss);
 t_sockaddr_in	*get_ipv4_addr(char *address, int port, t_sockaddr_in *ss, int addrtype);
-int		ping_receive(int sockfd);
+int		ping_receive(int sockfd, t_sockaddr_in *socaddr);
 int		ping_loop(t_ping *ping);
 int	check_addr(t_ping *ping);
 

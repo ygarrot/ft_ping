@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 16:37:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/14 18:12:40 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ping_loop(t_ping *ping)
 	{
 		set_packet(&ping->packet);
 		ping_send(&ping->packet, ping->socket, &ping->sockaddr);
-		ping_receive(ping->socket);
+		ping_receive(ping->socket, &ping->sockaddr);
 	}
 	gettimeofday(&ping->end_time, 0);
 	ft_printf("%ld\n", ping->start_time.tv_sec);
