@@ -25,6 +25,8 @@ OBJ_DIR = obj
 
 SRC =\
 	 fill_ip.c\
+	 packet.c\
+	 checksum.c\
 	 ip_version.c\
 	 main.c\
 	 ping.c\
@@ -62,6 +64,9 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make -C libft fclean
+
+exec: $(NAME)
+	./$(NAME) www.google.com
 
 re: fclean all
 PHONY: $(NAME) all clean fclean re

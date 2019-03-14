@@ -6,13 +6,14 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 14:07:22 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/14 16:48:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PING_H
 #define FT_PING_H
 
+#include "debug.h"
 #include "../libft/includes/libft.h"
 
 #include <sys/socket.h>
@@ -33,7 +34,7 @@
 #include <netinet/ip_icmp.h>
 
 #define BUFF_S 23
-#define PACKETSIZE 23
+#define PACKETSIZE 64
 # define SEND_ERROR "ERROR SEND ERROR\n"
 # define RECV_ERROR "ERROR RECV ERROR\n"
 # define REQUEST_OK "OK\n"
@@ -76,17 +77,21 @@ typedef struct	s_packet
 
 typedef struct s_ping
 {
+	t_timeval	start_time;
+	t_timeval	end_time;
+	t_sockaddr_in	sockaddr;
+	t_hostent	*host_entity; 
+	t_packet	packet;
 	char		*host_name;
-	t_hostent *host_entity; 
-	int socket;
-	t_sockaddr *sockaddr;
+	int			socket;
 	int		sockaddr_len;
 	int		active;
 	int		port;
-	t_timeval	start_time;
-	t_timeval	end_time;
 }		t_ping;
 
+int		ping_send(t_packet *data, int socket, t_sockaddr_in *ping_addr);
+unsigned short checksum(void *b, int len) ;
+int		set_packet(t_packet *pckt);
 int				set_socket(int is_ipv4);
 t_sockaddr		*get_sock_addr(char *addr, int port, int is_serv);
 t_sockaddr_in6	*get_ipv6_addr(char *address, int port, t_sockaddr_in6 *ss);

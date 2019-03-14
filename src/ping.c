@@ -6,19 +6,21 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 13:51:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/14 17:40:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 
-int		ping_send(t_packet *data, int socket, t_sockaddr *ping_addr)
+int		ping_send(t_packet *data, int socket, t_sockaddr_in *ping_addr)
 {
-	if (sendto(socket, &data, sizeof(*data), 0,
-				ping_addr,  
-				sizeof(*ping_addr)) <= 0) 
+	if (sendto(socket, data,
+			   	sizeof(t_packet), 0,
+				(t_sockaddr*)ping_addr,
+				sizeof(t_sockaddr_in) ) <= 0) 
 	{ 
-		printf("\nPacket Sending Failed!\n"); 
+		perror("sendto");
+		ft_exit("\nPacket Sending Failed!\n", EXIT_FAILURE); 
 		/* flag=0; */ 
 	} 
 	return 1;
@@ -57,7 +59,7 @@ int		ping_receive(int sockfd)
 	/* msg.msg_accrightslen = sizeof(pass_sd); */
 	if (recvmsg(sockfd, &msg, 0) <= 0)
 	{ 
-		printf("\nPacket receive failed!\n");
+		ft_printf("\nPacket receive failed!\n");
 	} 
 	return (1);
 }

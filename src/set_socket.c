@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:21:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 13:49:25 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/14 17:01:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ int	create_socket(t_ping *ping, int is_ipv4)
 	ft_bzero(&sin, sizeof(sin));
 	sock = set_socket(is_ipv4);
 	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &reuseaddr, sizeof(reuseaddr));
-	ping->sockaddr = is_ipv4 ?
-		(t_sockaddr*)get_ipv4_addr(NULL, ping->port, &sin, ping->host_entity->h_addrtype)
-		: (t_sockaddr*)get_ipv6_addr(NULL, ping->port, &sin2);
+	/* ping->sockaddr = */ 
+	get_ipv4_addr(ping->host_entity->h_name, ping->port, &ping->sockaddr, ping->host_entity->h_addrtype);
+	/* ping->sockaddr = is_ipv4 ? */
+		/* (t_sockaddr*)get_ipv4_addr(NULL, ping->port, &sin, ping->host_entity->h_addrtype) */
+		/* : (t_sockaddr*)get_ipv6_addr(NULL, ping->port, &sin2); */
+	ping->sockaddr.sin_addr.s_addr = *(long*)ping->host_entity->h_addr;
 	return (sock);
 }
 
@@ -45,10 +48,9 @@ int	create_socket(t_ping *ping, int is_ipv4)
 int	check_addr(t_ping *ping)
 {
 	int		is_ipv4;
-	/* char *ip=(char*)malloc(NI_MAXHOST*sizeof(char)); */
 
 	if ((ping->host_entity = gethostbyname(ping->host_name)) == NULL) 
 		return (0); 
-	is_ipv4 = ip_version(ping->host_entity->h_addr) == 4;
+	is_ipv4 = ping->host_entity->h_addrtype == AF_INET;
 	return (create_socket(ping, is_ipv4));
 }
