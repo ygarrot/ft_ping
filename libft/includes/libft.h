@@ -6,11 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/03/14 13:16:43 by ygarrot          ###   ########.fr       */
-=======
-/*   Updated: 2019/03/05 17:55:14 by ygarrot          ###   ########.fr       */
->>>>>>> 481ff8ddf501b92bad1b4a18c1ccd2425b20ff35
+/*   Updated: 2019/03/14 14:51:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +209,6 @@ int				ft_swap_int(int num);
 int				ft_getopt(int ac, char *av[], const char *optst, int *nb);
 int				ft_islower(int c);
 int				ft_isupper(int c);
-<<<<<<< HEAD
 int				ft_exit(char *str, int code);
-=======
->>>>>>> 481ff8ddf501b92bad1b4a18c1ccd2425b20ff35
 
 #endif
