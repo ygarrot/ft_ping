@@ -6,7 +6,11 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2019/03/14 13:16:54 by ygarrot          ###   ########.fr        #
+=======
+#    Updated: 2019/03/08 12:40:09 by ygarrot          ###   ########.fr        #
+>>>>>>> 481ff8ddf501b92bad1b4a18c1ccd2425b20ff35
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +29,10 @@ OBJDIR = obj
 INCDIR = includes
 
 SRC = \
+<<<<<<< HEAD
 	  misc/ft_exit.c\
+=======
+>>>>>>> 481ff8ddf501b92bad1b4a18c1ccd2425b20ff35
 	  misc/ft_occiter.c \
 	  misc/ft_occur_in.c \
 	  misc/ft_row_div.c \
