@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:06:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:16:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,15 @@ int	ping_loop(t_ping *ping)
 	gettimeofday(&ping->tstat.start, 0);
 	while (!looping)
 	{
+		ping->pstat.count++;
 		set_packet(&ping->packet, ping);
 		ping_send(&ping->packet, ping->socket, ping);
 		intervale();
 		ping_receive(ping->socket, ping);
 		ping->tstat.intervale = intervale();
 		set_time_stat(ping);
-		print_ping(ping);
+		if (!(ping->opt & QUIET))
+			print_ping(ping);
 	}
 	gettimeofday(&ping->tstat.current, 0);
 	print_stat(ping);

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 20:20:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:15:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		ping_send(t_packet *data, int socket, t_ping *ping)
 		/* flag=0; */ 
 	} 
 	ping->pstat.send++;
+	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->pstat.send)
+		looping = 1;
 	return 1;
 }
 
@@ -65,7 +67,7 @@ int		ping_receive(int sockfd, t_ping *ping)
 	{ 
 		perror("receive");
 		ft_printf("\nPacket receive failed!\n");
-	} 
+	}
 	ping->pstat.rcv++;
 	return (1);
 }

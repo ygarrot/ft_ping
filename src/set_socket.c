@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:21:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 13:53:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:20:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	create_socket(t_ping *ping, int is_ipv4)
 	ft_bzero(&sin2, sizeof(sin2));
 	ft_bzero(&sin, sizeof(sin));
 	sock = set_socket(is_ipv4);
-	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &reuseaddr, sizeof(reuseaddr));
+	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO 
+| ((ping->opt & DEBUG)  * SO_DEBUG) , &reuseaddr, sizeof(reuseaddr));
 	/* ping->sockaddr = */ 
 	/* get_ipv4_addr(ping->host_entity->h_name, ping->port, &ping->sockaddr, ping->host_entity->h_addrtype); */
 	/* ping->sockaddr = is_ipv4 ? */

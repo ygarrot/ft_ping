@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 20:51:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:18:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_packet_stat
 	int		count_max;
 	int		sndbuff;
 }				t_packet_stat;
+#define PORT_TMP 12
 
 typedef struct s_time_stat
 {
@@ -143,6 +144,7 @@ typedef struct	s_ping
 	int				port;
 }				t_ping;
 
+extern int looping;
 void	ping_ctor(t_ping *ping);
 void	ping_dtor(t_ping *ping);
 void	func_tab(t_ping *ping);
