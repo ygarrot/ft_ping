@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:01:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:41:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../libft/includes/libft.h"
 
 #include <netdb.h>
+#include <stdio.h>
 #include <sys/socket.h>
 # include <sys/types.h>
 
@@ -114,6 +115,7 @@ typedef struct	s_ping
 	int				port;
 }				t_ping;
 
+int		set_time_stat(t_ping *ping);
 int	print_ping(t_ping *ping);
 int	print_stat(t_ping *ping);
 double timeval_to_double(t_timeval last_time, t_timeval current_time);

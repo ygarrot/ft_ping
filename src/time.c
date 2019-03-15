@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:02:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:58:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,17 @@ double intervale(void)
 
 int		set_time_stat(t_ping *ping)
 {
+	static	double std_sum = 0.0;
 	t_time_stat time;
 
 	time = ping->tstat;
-	ping->tstat.max = ft_max(time.max, time.intervale);
-	ping->tstat.min = ft_min(time.max, time.intervale);
+	ping->tstat.max = time.intervale > time.max ? time.intervale : time.intervale;
+	ping->tstat.min = time.max && (time.intervale > time.min) ? time.min : time.intervale;
 	ping->tstat.avg = time.all / time.count;
+	std_sum += ft_power(time.intervale - time.avg, 2);
+	if (time.count > 0 && std_sum > 0)
+		ping->tstat.mdev = ft_sqrt((double)(1.0 / time.count) * std_sum);
 	ping->tstat.count++;
 	ping->tstat.all += time.intervale;
+	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 15:33:56 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:34:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:43:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_min(int n, int m)
+int		ft_max(int n, int m)
 {
 	return (n < m ? m : n);
 }
