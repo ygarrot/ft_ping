@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:58:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 19:37:18 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ double timeval_to_double(t_timeval last_time, t_timeval current_time)
 	return (intervale);
 }
 
-#define PING_SLEEP_RATE 1000000
 double intervale(void)
 {
 	static t_timeval	last_time = {0.0, 0.0};
