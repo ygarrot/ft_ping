@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 14:03:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 16:01:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		ping_send(t_packet *data, int socket, t_ping *ping)
 		ft_exit("\nPacket Sending Failed!\n", EXIT_FAILURE); 
 		/* flag=0; */ 
 	} 
+	ping->pstat.send++;
 	return 1;
 }
 
@@ -63,6 +64,7 @@ int		ping_receive(int sockfd, t_ping *ping)
 	{ 
 		ft_printf("\nPacket receive failed!\n");
 	} 
+	ping->pstat.rcv++;
 	return (1);
 }
 
