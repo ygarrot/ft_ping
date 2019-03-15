@@ -24,6 +24,7 @@ INCLUDE =  includes/
 OBJ_DIR = obj
 
 SRC =\
+    	 print.c\
 	 fill_ip.c\
 	 packet.c\
 	 checksum.c\

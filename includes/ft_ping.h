@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 18:12:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 14:01:50 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 #include "debug.h"
 #include "../libft/includes/libft.h"
 
+#include <netdb.h>
 #include <sys/socket.h>
 # include <sys/types.h>
 
 # include <sys/uio.h>
+
+#include <signal.h>
 
 # include <unistd.h>
 
@@ -64,6 +67,7 @@ typedef struct ip	t_ip;
 typedef struct tcphdr t_tcphdr;
 typedef struct icmphdr t_icmphdr;
 typedef struct hostent t_hostent;
+typedef struct addrinfo	t_addrinfo;
 int				ip_version(const char *src);
 
 
@@ -75,29 +79,52 @@ typedef struct	s_packet
 
 /* int		ping_send(void *data, int socket); */
 
-typedef struct s_ping
+typedef struct s_packet_stat
 {
-	t_timeval	start_time;
-	t_timeval	end_time;
-	t_sockaddr_in	sockaddr;
-	t_hostent	*host_entity; 
-	t_packet	packet;
-	char		*host_name;
-	int			socket;
-	int		sockaddr_len;
-	int		active;
-	int		port;
-}		t_ping;
+	int		send;
+	int		rcv;
+	int		count;
+}				t_packet_stat;
 
-int		ping_send(t_packet *data, int socket, t_sockaddr_in *ping_addr);
+typedef struct s_time_stat
+{
+	t_timeval	start;
+	t_timeval	current;
+	long double			intervale;
+	long double			min;
+	long double			avg;
+	long double			max;
+	long double			mdev;
+	int					ttl;
+}				t_time_stat;
+
+typedef struct	s_ping
+{
+	t_sockaddr		*sockaddr;
+	t_addrinfo		*host_entity; 
+	t_packet		packet;
+	t_packet_stat	pstat;
+	t_time_stat		tstat;
+	char			host_addr[100];
+	char			*host_name;
+	int				socket;
+	int				sockaddr_len;
+	int				port;
+}				t_ping;
+
+int	print_ping(t_ping *ping);
+int	print_stat(t_ping *ping);
+double timeval_to_double(t_timeval last_time, t_timeval current_time);
+int		ping_send(t_packet *data, int socket, t_ping *ping);
 unsigned short checksum(void *b, int len) ;
 int		set_packet(t_packet *pckt);
 int				set_socket(int is_ipv4);
 t_sockaddr		*get_sock_addr(char *addr, int port, int is_serv);
 t_sockaddr_in6	*get_ipv6_addr(char *address, int port, t_sockaddr_in6 *ss);
 t_sockaddr_in	*get_ipv4_addr(char *address, int port, t_sockaddr_in *ss, int addrtype);
-int		ping_receive(int sockfd, t_sockaddr_in *socaddr);
+int		ping_receive(int sockfd, t_ping *ping);
 int		ping_loop(t_ping *ping);
 int	check_addr(t_ping *ping);
+double intervale(void);
 
 #endif

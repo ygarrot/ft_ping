@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 14:07:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 13:21:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,29 @@ struct timezone {
 The tz_dsttime field has never been used under Linux. Thus, the following is purely of historic interest.
 */
 
+double timeval_to_double(t_timeval last_time, t_timeval current_time)
+{
+	double intervale;
 
+	intervale = (double)(current_time.tv_sec - last_time.tv_sec) * 1000.0;
+	intervale += (double)(current_time.tv_usec - last_time.tv_usec)
+	  / 1000.0 ;
+	return (intervale);
+}
+
+#define PING_SLEEP_RATE 1000000
 double intervale(void)
 {
+	static t_timeval	last_time = {0.0, 0.0};
+	t_timeval			current_time;
+	double				intervale;
 	/* t_timezone	timezone; */
-	static t_timeval start;
-	static t_timeval current_time;
 
-	/* timezone.tz_dsttime = DST_WET; */
-	(void)start;
-	(void)current_time;
+	/* timezone.tz_dsttime = DST_WEST; */
+    /* usleep(PING_SLEEP_RATE); */ 
 	if (gettimeofday(&current_time, 0) == ERROR_CODE)
 		return (0);
-	/* last_time = c */
-	return 1;
+	intervale = timeval_to_double(last_time, current_time);
+	last_time = current_time;
+	return (intervale);
 }
