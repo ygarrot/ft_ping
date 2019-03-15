@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 14:01:50 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:01:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct s_time_stat
 	long double			max;
 	long double			mdev;
 	int					ttl;
+	long double			all;
+	int					count;
 }				t_time_stat;
 
 typedef struct	s_ping

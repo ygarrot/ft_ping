@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 13:21:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:02:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ double intervale(void)
 	intervale = timeval_to_double(last_time, current_time);
 	last_time = current_time;
 	return (intervale);
+}
+
+int		set_time_stat(t_ping *ping)
+{
+	t_time_stat time;
+
+	time = ping->tstat;
+	ping->tstat.max = ft_max(time.max, time.intervale);
+	ping->tstat.min = ft_min(time.max, time.intervale);
+	ping->tstat.avg = time.all / time.count;
+	ping->tstat.count++;
+	ping->tstat.all += time.intervale;
 }

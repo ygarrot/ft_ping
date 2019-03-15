@@ -16,7 +16,7 @@ NAME = ft_ping
 
 FLAGS = -Wall -Werror -Wextra
 FLAGS += -g3
-FLAGS += -fsanitize=address,undefined
+#FLAGS += -fsanitize=address,undefined
 SRC_DIR = src
 
 INCLUDE =  includes/

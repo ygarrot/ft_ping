@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/14 14:51:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:34:32 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -177,7 +176,7 @@ void			ft_strswap(char *str, char *str2);
 char			**ft_strtabdup(char **tabl);
 char			*ft_strdupto(char *str, char to);
 int				ft_indexmin(int *tabl, size_t len);
-int				ft_sqrt(int n);
+double			ft_sqrt(double n);
 int				ft_gotmod(size_t nb, int i);
 int				ft_writenchar(char c, int n);
 int				ft_strlenin(char *str, char *lim);
@@ -211,4 +210,6 @@ int				ft_islower(int c);
 int				ft_isupper(int c);
 int				ft_exit(char *str, int code);
 
+double	ft_std(double *array, int len);
+double	ft_mean(double *array, int len);
 #endif

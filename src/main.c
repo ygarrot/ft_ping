@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 14:02:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 14:17:31 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int looping = 0;
 void	stop_loop(int signal)
 {
 	(void)signal;
+	printf("caught sigint\n");
 	looping = 1;
 }
 
@@ -58,6 +59,7 @@ int	ping_loop(t_ping *ping)
 		print_ping(ping);
 	}
 	gettimeofday(&ping->tstat.current, 0);
+	print_stat(ping);
 	return (1);
 }
 

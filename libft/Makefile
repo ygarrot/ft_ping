@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/03/14 14:50:54 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/03/15 15:34:23 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,14 +51,11 @@ SRC += \
 	   tern/ft_isbase.c \
 	   tern/ft_isdigit.c \
 	   tern/ft_isin.c \
-	   tern/ft_ismax.c \
 	   tern/ft_isupper.c \
 	   tern/ft_islower.c \
-	   tern/ft_ismin.c \
 	   tern/ft_isprint.c \
 	   tern/ft_strisin.c \
 	   tern/ft_strisin_tab.c \
-	   tern/ft_min.c \
 	   tern/ft_lenchar_r.c \
 	   tern/ft_lenchar_l.c \
 	   tern/ft_isin_unicode.c
@@ -197,6 +194,15 @@ SRC +=\
 
 SRC +=\
 			parsing/ft_getopt.c
+
+SRC +=\
+	  math/ft_mean.c\
+	  math/ft_std.c\
+	  math/ft_sqrt.c\
+	  math/ft_ismax.c \
+	  math/ft_ismin.c \
+	  math/ft_max.c\
+	  math/ft_min.c
 #Colors
 
 _RED=$(shell tput setaf 1)
