@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:56:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 14:23:58 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 18:06:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_ping(t_ping *ping)
 		/* else */
 		/* { */ 
 			printf("%d bytes from %s (%s): icmp_seq=%d ttl=%d time=%.2Lf ms.\n",  \
-					PACKETSIZE, "(NULL)", ping->host_addr, \
+					ping->pstat.size, "(NULL)", ping->host_addr, \
 					ping->pstat.count, 
 					ping->tstat.ttl, ping->tstat.intervale); 
 		/* } */ 

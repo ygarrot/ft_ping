@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/03/15 15:34:23 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/03/15 18:09:17 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRC = \
 	  misc/ft_occur_in.c \
 	  misc/ft_row_div.c \
 	  misc/ft_intswap.c \
-	  misc/ft_power.c \
 	  misc/ft_cpy.c
 
 SRC += \
@@ -193,7 +192,8 @@ SRC +=\
 			 unix/stat/is_regular_file.c
 
 SRC +=\
-			parsing/ft_getopt.c
+			parsing/ft_getopt.c\
+			parsing/ft_getoptvalue.c
 
 SRC +=\
 	  math/ft_mean.c\
@@ -202,6 +202,7 @@ SRC +=\
 	  math/ft_ismax.c \
 	  math/ft_ismin.c \
 	  math/ft_max.c\
+	  math/ft_power.c\
 	  math/ft_min.c
 #Colors
 

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:41:24 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 19:12:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "debug.h"
 #include "../libft/includes/libft.h"
 
-#include <netdb.h>
 #include <stdio.h>
+#include <netdb.h>
 #include <sys/socket.h>
 # include <sys/types.h>
 
@@ -38,7 +38,10 @@
 #include <netinet/ip_icmp.h>
 
 #define BUFF_S 23
-#define PACKETSIZE 64
+/* #define  1000000 */
+#define PACKET_SIZE_DEFAULT 64
+#define DEFAULT_TIMEOUT 1
+#define TTL_DEFAULT 64
 # define SEND_ERROR "ERROR SEND ERROR\n"
 # define RECV_ERROR "ERROR RECV ERROR\n"
 # define REQUEST_OK "OK\n"
@@ -55,7 +58,23 @@
 # define SOCKET_ERROR "ERROR SOCKET ERROR\n"
 # define ERROR_CODE -1
 
+#define OPT_STR "cdinqsStTvwWh"
 
+enum {
+	COUNT = (1 << 0),
+	DEBUG = (1 << 1),
+	INTERVALE = (1 << 2),
+	NUMERIC = (1 << 3),
+	QUIET = (1 << 4),
+	PACKET_SIZE = (1 << 5),
+	SNDBUFF = (1 << 6),
+	TTL = (1 << 7),
+	TIMESTAMP = (1 << 8),
+	VERBOSE = (1 << 9),
+	DEADLINE = (1 << 10),
+	TIMEOUT = (1 << 11),
+	HELP = (1 << 12)
+};
 
 typedef struct timeval	t_timeval;
 typedef struct timezone	t_timezone;
@@ -75,16 +94,19 @@ int				ip_version(const char *src);
 typedef struct	s_packet
 {
 	t_icmphdr	hdr;
-	char msg[PACKETSIZE - sizeof(t_icmphdr)];
+	char		*msg;
 }				t_packet;
 
 /* int		ping_send(void *data, int socket); */
 
 typedef struct s_packet_stat
 {
+	int		size;
 	int		send;
 	int		rcv;
 	int		count;
+	int		count_max;
+	int		sndbuff;
 }				t_packet_stat;
 
 typedef struct s_time_stat
@@ -92,6 +114,7 @@ typedef struct s_time_stat
 	t_timeval	start;
 	t_timeval	current;
 	long double			intervale;
+	long double			delay;
 	long double			min;
 	long double			avg;
 	long double			max;
@@ -99,6 +122,8 @@ typedef struct s_time_stat
 	int					ttl;
 	long double			all;
 	int					count;
+	int					deadline;
+	int					timeout;
 }				t_time_stat;
 
 typedef struct	s_ping
@@ -108,6 +133,8 @@ typedef struct	s_ping
 	t_packet		packet;
 	t_packet_stat	pstat;
 	t_time_stat		tstat;
+	char			*opt_tab[HELP + 1];
+	int				opt;
 	char			host_addr[100];
 	char			*host_name;
 	int				socket;
@@ -115,13 +142,24 @@ typedef struct	s_ping
 	int				port;
 }				t_ping;
 
+void	ping_ctor(t_ping *ping);
+void	ping_dtor(t_ping *ping);
+void	func_tab(t_ping *ping);
+void	set_intervale(t_ping *ping, char *value);
+void	set_timeout(t_ping *ping, char *value);
+void	set_deadline(t_ping *ping, char *value);
+void	set_packetsize(t_ping *ping, char *value);
+void	set_countmax(t_ping *ping, char *value);
+void	set_sndbuff(t_ping *ping, char *value);
+void	set_ttl(t_ping *ping, char *value);
+
 int		set_time_stat(t_ping *ping);
 int	print_ping(t_ping *ping);
 int	print_stat(t_ping *ping);
 double timeval_to_double(t_timeval last_time, t_timeval current_time);
 int		ping_send(t_packet *data, int socket, t_ping *ping);
 unsigned short checksum(void *b, int len) ;
-int		set_packet(t_packet *pckt);
+int		set_packet(t_packet *pckt, t_ping *ping);
 int				set_socket(int is_ipv4);
 t_sockaddr		*get_sock_addr(char *addr, int port, int is_serv);
 t_sockaddr_in6	*get_ipv6_addr(char *address, int port, t_sockaddr_in6 *ss);
