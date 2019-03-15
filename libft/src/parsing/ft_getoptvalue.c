@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:58:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 18:53:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:04:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int		ft_getoptvalue(int argc, char *argv[],
 			{
 				if (ft_isin((char)(argv[i][i2]), (char*)optstring))
 					last = ft_charchr(argv[i][i2], (char*)optstring);
-				ret |= 1 << last;
+				ret |= (1 << last);
 			}
 		}
 		else
-			opts[last] = argv[i];
+			opts[last] = argv[i] ;
 	}
 	return (ret);
 }

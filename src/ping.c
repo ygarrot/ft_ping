@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 20:15:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:20:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		ping_send(t_packet *data, int socket, t_ping *ping)
 {
-	ft_printf("%d\n", ping->pstat.size);
 	if (sendto(socket, data,
 			sizeof(t_packet),
 			   /* ping->pstat.size + sizeof(t_icmphdr) */

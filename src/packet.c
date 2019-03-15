@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:45:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 20:15:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:20:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		set_packet(t_packet *pckt, t_ping *ping)
 
 	pckt->hdr.type = ICMP_ECHO;
 	pckt->hdr.un.echo.id = getpid();
-	ft_bzero(pckt->msg, ping->pstat.size);
 	for (i = 0; i < ping->pstat.size - 1; i++ ) 
 		pckt->msg[i] = i + '0';
 	pckt->msg[i] = 0;

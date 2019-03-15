@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 17:45:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 18:57:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:06:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,23 @@ void	func_tab(t_ping *ping)
 	int	index;
 	void	(*f[16])(t_ping *p, char *);
 
-	f[ft_strlento(OPT_STR,'t')] = set_ttl;
-	f[ft_strlento(OPT_STR,'s')] =  set_sndbuff;
-	/* f[ft_strlento(OPT_STR,'p')] = set_packetsize; */
+	f[(int)ft_sqrt(TTL)] = set_ttl;
+	f[ft_strlento(OPT_STR,'s')] = set_packetsize;
+	f[ft_strlento(OPT_STR,'S')] =  set_sndbuff;
 	f[ft_strlento(OPT_STR,'c')] = set_countmax;
 	f[ft_strlento(OPT_STR,'w')] = set_deadline;
 	f[ft_strlento(OPT_STR,'W')] = set_timeout;
 	f[ft_strlento(OPT_STR,'h')] = display_help;
-	f[ft_strlento(OPT_STR,'i')] = set_intervale;
-	i = 0;
+	f[(int)ft_sqrt(INTERVALE)] = set_intervale;
+	i = 1;
 	index = 0;
-	while (index < 64)
+	while (i < (1 << 30))
 	{
-		index++;
-		if (ping->opt & i && f[index])
+		if (ping->opt & i && f[index] && ping->opt_tab[index])
+		{
 			f[index](ping, ping->opt_tab[index]);
-		i >>= 2;
+		}
+		index++;
+		i <<= 1;
 	}
 }

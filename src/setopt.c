@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:27:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 17:56:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:02:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_countmax(t_ping *ping, char *value)
 
 void	set_intervale(t_ping *ping, char *value)
 {
-	ping->tstat.delay = ft_atoi(value);
+	ping->tstat.delay = atof(value);
 }
 
 
