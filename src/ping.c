@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 19:40:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:15:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		ping_send(t_packet *data, int socket, t_ping *ping)
 {
-	ft_printf("%d\n", socket, data->msg);
+	ft_printf("%d\n", ping->pstat.size);
 	if (sendto(socket, data,
-			   	ping->pstat.size + sizeof(t_icmphdr), 0,
-				(t_sockaddr*)ping->sockaddr,
+			sizeof(t_packet),
+			   /* ping->pstat.size + sizeof(t_icmphdr) */
+				0, (t_sockaddr*)ping->sockaddr,
 				ping->sockaddr_len ) <= 0) 
 	{ 
 		perror("sendto");

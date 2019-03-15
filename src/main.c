@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 19:11:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:05:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 
 	if (usage(ac, av))
 		return 1;
-	ping.opt = ft_getoptvalue(ac, av, OPT_STR, ping.opt_tab);
+	/* ping.opt = ft_getoptvalue(ac, av, OPT_STR, ping.opt_tab); */
 	ping_ctor(&ping);
 	ping.host_name = av[1];
 	ping.socket = check_addr(&ping);
