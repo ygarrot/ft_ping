@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 12:40:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:39:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,11 @@ double intervale(void)
 	static t_timeval	last_time = {0.0, 0.0};
 	t_timeval			current_time;
 	double				intervale;
-	/* t_timezone	timezone; */
 
-	/* timezone.tz_dsttime = DST_WEST; */
-    /* usleep(PING_SLEEP_RATE); */ 
 	if (gettimeofday(&current_time, 0) == ERROR_CODE)
 		return (0);
 	intervale = timeval_to_double(last_time, current_time);
 	last_time = current_time;
-	/* printf("%f\n", intervale); */
 	return (intervale);
 }
 
@@ -66,6 +62,12 @@ int		set_time_stat(t_ping *ping)
 		ping->tstat.mdev = ft_sqrt((double)(1.0 / time.count) * std_sum);
 	ping->tstat.count++;
 	ping->tstat.all += time.intervale;
+	gettimeofday(&ping->tstat.current, 0);
+	if (time.deadline > 0 
+	&& timeval_to_double(time.start, time.current) >= time.deadline)
+		stop_loop(2);
+	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->tstat.count)
+		stop_loop(2);
 	return (1);
 }
 

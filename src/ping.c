@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 12:14:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:27:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int		ping_send(t_packet *pckt, int socket, t_ping *ping)
 				0, (t_sockaddr*)ping->sockaddr,
 				ping->sockaddr_len ) <= 0) 
 	{ 
-		ft_printf("Packet Sending Failed!\n"); 
+		ft_exit("connect: invalid argument", 1);
 		return (ERROR_CODE);
 	} 
 	ping->pstat.send++;
 	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->pstat.send)
-		looping = 1;
+		stop_loop(2);
 	return (1);
 }
 
@@ -51,6 +51,7 @@ int		ping_receive(int sockfd, t_ping *ping)
 	char			buffer[BUFF_S + 1];
 	struct msghdr	msg;
 
+	ft_bzero(&buffer, sizeof(buffer));
 	ft_bzero(&msg, sizeof(msg));
 	ft_bzero(&iov, sizeof(iov));
 	iov[0].iov_base = buffer;

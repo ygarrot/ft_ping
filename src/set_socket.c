@@ -6,11 +6,25 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:21:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:20:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:32:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
+
+int		reverse_dns_lookup(t_ping *ping)
+{
+	char service[1024];
+
+	ft_bzero(service, sizeof(service));
+    if (getnameinfo(ping->host_entity->ai_addr,
+	ping->host_entity->ai_addrlen, ping->dns_addr, NI_MAXHOST,
+   	service, sizeof(service), NI_NAMEREQD))  
+	{
+        printf("Could not resolve reverse lookup of hostname\n"); 
+	}
+	return (1);
+}
 
 int	create_socket(t_ping *ping, int is_ipv4)
 {
@@ -24,12 +38,6 @@ int	create_socket(t_ping *ping, int is_ipv4)
 	sock = set_socket(is_ipv4);
 	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO 
 | ((ping->opt & DEBUG)  * SO_DEBUG) , &reuseaddr, sizeof(reuseaddr));
-	/* ping->sockaddr = */ 
-	/* get_ipv4_addr(ping->host_entity->h_name, ping->port, &ping->sockaddr, ping->host_entity->h_addrtype); */
-	/* ping->sockaddr = is_ipv4 ? */
-		/* (t_sockaddr*)get_ipv4_addr(NULL, ping->port, &sin, ping->host_entity->h_addrtype) */
-		/* : (t_sockaddr*)get_ipv6_addr(NULL, ping->port, &sin2); */
-	/* ping->sockaddr.sin_addr.s_addr = *(long*)ping->host_entity->h_addr; */
 	ping->sockaddr = ping->host_entity->ai_addr;
 	ping->sockaddr_len = ping->host_entity->ai_addrlen;
 	return (sock);
@@ -62,10 +70,14 @@ int	check_addr(t_ping *ping)
 	tmp.ai_flags |= AI_CANONNAME;
 	if (getaddrinfo(ping->host_name, NULL, &tmp, &ping->host_entity)
 != 0)
-		return (0);
+	{
+		printf("ping: Name or Service not known\n");
+		return (ERROR_CODE);
+	}
 	ptr = &((t_sockaddr_in*)ping->host_entity->ai_addr)->sin_addr;
 	is_ipv4 = ping->host_entity->ai_family == PF_INET;
 	inet_ntop(ping->host_entity->ai_family, ptr,
   ping->host_addr, 100);
+	reverse_dns_lookup(ping);
 	return (create_socket(ping, is_ipv4));
 }

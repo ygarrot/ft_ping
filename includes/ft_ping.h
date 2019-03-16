@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 12:35:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 14:47:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 # include <netinet/ip.h>
 #include <netinet/ip_icmp.h>
 
-#define BUFF_S 23
-/* #define  1000000 */
+#define PING_BAD_COUNT "ping: bad number of packets to transmit."
+#define BUFF_S 1500
 #define PACKET_SIZE_DEFAULT 64
 #define DEFAULT_TIMEOUT 1
+#define DEFAULT_DELAY 1.0
 #define TTL_DEFAULT 64
 # define SEND_ERROR "ERROR SEND ERROR\n"
 # define RECV_ERROR "ERROR RECV ERROR\n"
@@ -138,13 +139,15 @@ typedef struct	s_ping
 	char			*opt_tab[HELP + 1];
 	int				opt;
 	char			host_addr[100];
+	char			dns_addr[NI_MAXHOST];
 	char			*host_name;
 	int				socket;
 	int				sockaddr_len;
 	int				port;
 }				t_ping;
 
-extern int looping;
+extern t_ping *g_ping;
+void	stop_loop(int signal);
 void	ping_ctor(t_ping *ping);
 void	ping_dtor(t_ping *ping);
 void	func_tab(t_ping *ping);
@@ -172,5 +175,7 @@ int		ping_loop(t_ping *ping);
 int	check_addr(t_ping *ping);
 double intervale(void);
 int wait_for (double sec);
+int	print_summary(t_ping *ping);
+int		reverse_dns_lookup(t_ping *ping);
 
 #endif
