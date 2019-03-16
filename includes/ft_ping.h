@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 11:22:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:35:05 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,6 @@ int		ping_receive(int sockfd, t_ping *ping);
 int		ping_loop(t_ping *ping);
 int	check_addr(t_ping *ping);
 double intervale(void);
+int wait_for (double sec);
 
 #endif

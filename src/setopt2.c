@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 17:45:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:06:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:14:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	func_tab(t_ping *ping)
 	int	index;
 	void	(*f[16])(t_ping *p, char *);
 
-	f[(int)ft_sqrt(TTL)] = set_ttl;
+	f[ft_strlento(OPT_STR,'t')] = set_ttl;
 	f[ft_strlento(OPT_STR,'s')] = set_packetsize;
 	f[ft_strlento(OPT_STR,'S')] =  set_sndbuff;
 	f[ft_strlento(OPT_STR,'c')] = set_countmax;

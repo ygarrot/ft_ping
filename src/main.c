@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 11:18:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:41:56 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ping_loop(t_ping *ping)
 	} 
 	setsockopt(ping->socket, SOL_SOCKET, SO_RCVTIMEO,
 			(const char*)&tv_out, sizeof tv_out);
-	gettimeofday(&ping->tstat.start, 0);
+	/* gettimeofday(&ping->tstat.start, 0); */
 	while (!looping)
 	{
 		ping->pstat.count++;
@@ -56,11 +56,12 @@ int	ping_loop(t_ping *ping)
 		intervale();
 		ping_receive(ping->socket, ping);
 		ping->tstat.intervale = intervale();
+		wait_for(1.0);
 		set_time_stat(ping);
 		if (!(ping->opt & QUIET))
 			print_ping(ping);
 	}
-	gettimeofday(&ping->tstat.current, 0);
+	/* gettimeofday(&ping->tstat.current, 0); */
 	print_stat(ping);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 19:37:18 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:40:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ double intervale(void)
 		return (0);
 	intervale = timeval_to_double(last_time, current_time);
 	last_time = current_time;
+	/* printf("%f\n", intervale); */
 	return (intervale);
 }
 
@@ -65,5 +66,25 @@ int		set_time_stat(t_ping *ping)
 		ping->tstat.mdev = ft_sqrt((double)(1.0 / time.count) * std_sum);
 	ping->tstat.count++;
 	ping->tstat.all += time.intervale;
+	return (1);
+}
+
+int wait_for (double sec)
+{
+	t_timeval			current_time;
+	double done;
+	double current;
+
+	current = 0.0;
+	if (gettimeofday(&current_time, 0) == ERROR_CODE)
+		return (0);
+	done = (current_time.tv_sec * 1000.0) + (current_time.tv_usec / 1000.0);
+	done += sec * 1000.0;
+	while (current < done)
+	{
+		if (gettimeofday(&current_time, 0) == ERROR_CODE)
+			return (0);
+		current = current_time.tv_sec * 1000.0 + current_time.tv_usec / 1000.0;
+	}
 	return (1);
 }

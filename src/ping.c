@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 11:24:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:14:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		ping_send(t_packet *pckt, int socket, t_ping *ping)
 				0, (t_sockaddr*)ping->sockaddr,
 				ping->sockaddr_len ) <= 0) 
 	{ 
-		perror("sendto");
-		ft_exit("\nPacket Sending Failed!\n", EXIT_FAILURE); 
+		ft_printf("Packet Sending Failed!\n"); 
+		return (ERROR_CODE);
 	} 
 	ping->pstat.send++;
 	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->pstat.send)
 		looping = 1;
-	return 1;
+	return (1);
 }
 
 /*
@@ -63,8 +63,8 @@ int		ping_receive(int sockfd, t_ping *ping)
 	/* msg.msg_accrightslen = sizeof(pass_sd); */
 	if (recvmsg(sockfd, &msg, MSG_WAITALL) < 0)
 	{ 
-		perror("receive");
-		ft_printf("\nPacket receive failed!\n");
+		ft_printf("Packet receive failed!\n");
+		return (ERROR_CODE);
 	}
 	ping->pstat.rcv++;
 	return (1);
