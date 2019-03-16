@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 14:47:07 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:44:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void	set_packetsize(t_ping *ping, char *value);
 void	set_countmax(t_ping *ping, char *value);
 void	set_sndbuff(t_ping *ping, char *value);
 void	set_ttl(t_ping *ping, char *value);
+void	display_help(t_ping *ping, char *value);
 
 int		set_time_stat(t_ping *ping);
 int	print_ping(t_ping *ping);

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 17:45:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 12:14:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:49:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	display_help(t_ping *ping, char *value)
 {
 	(void)ping;
 	(void)value;
-	printf("%s\n", OPT_STR);
+	char *usage = "Usage: ping [-cqditdw] [-c count] [-i interval] [-t ttl] [-w deadline] destination";
+	printf("%s\n", usage);
 }
 
 void	func_tab(t_ping *ping)
