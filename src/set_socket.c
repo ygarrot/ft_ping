@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:21:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 15:32:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 17:37:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		reverse_dns_lookup(t_ping *ping)
 	ping->host_entity->ai_addrlen, ping->dns_addr, NI_MAXHOST,
    	service, sizeof(service), NI_NAMEREQD))  
 	{
-        printf("Could not resolve reverse lookup of hostname\n"); 
+		printf("connect: Invalid argument\n");
+		return (ERROR_CODE);
 	}
 	return (1);
 }
@@ -33,6 +34,7 @@ int	create_socket(t_ping *ping, int is_ipv4)
 	t_sockaddr_in6	sin2;
 	t_sockaddr_in	sin;
 
+	reuseaddr = 1;
 	ft_bzero(&sin2, sizeof(sin2));
 	ft_bzero(&sin, sizeof(sin));
 	sock = set_socket(is_ipv4);
@@ -78,6 +80,7 @@ int	check_addr(t_ping *ping)
 	is_ipv4 = ping->host_entity->ai_family == PF_INET;
 	inet_ntop(ping->host_entity->ai_family, ptr,
   ping->host_addr, 100);
-	reverse_dns_lookup(ping);
+	if (reverse_dns_lookup(ping) == ERROR_CODE)
+		return (ERROR_CODE);
 	return (create_socket(ping, is_ipv4));
 }

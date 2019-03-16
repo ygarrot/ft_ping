@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:11:27 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 15:47:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 16:00:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_ping *g_ping;
 void	stop_loop(int signal)
 {
 	(void)signal;
+	g_ping->pstat.send--;
+	g_ping->pstat.rcv--;
 	print_stat(g_ping);
 	exit(1);
 }

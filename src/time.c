@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 15:39:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 16:02:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int		set_time_stat(t_ping *ping)
 	t_time_stat time;
 
 	time = ping->tstat;
-	ping->tstat.max = time.intervale > time.max ? time.intervale : time.intervale;
-	ping->tstat.min = time.max && (time.intervale > time.min) ? time.min : time.intervale;
+	ping->tstat.max = time.intervale > time.max ? time.intervale : time.max;
+	ping->tstat.min = time.min && (time.intervale > time.min) ? time.min : time.intervale;
 	ping->tstat.avg = time.all / time.count;
 	std_sum += ft_power(time.intervale - time.avg, 2);
 	if (time.count > 0 && std_sum > 0)

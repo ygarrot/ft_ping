@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2019/03/15 18:03:51 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/03/16 17:33:20 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = ft_ping
 
 FLAGS = -Wall -Werror -Wextra
 FLAGS += -g3
-FLAGS += -fsanitize=address,undefined
+# FLAGS += -fsanitize=address,undefined
 SRC_DIR = src
 
 INCLUDE =  includes/

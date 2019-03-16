@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:56:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 15:50:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:56:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	print_ping(t_ping *ping)
 	else
 		printf("%s (%s):",ping->dns_addr, ping->host_addr);
 	printf(" icmp_seq=%d ttl=%d time=%.2Lf ms\n",  \
-			ping->pstat.count,
+			ping->pstat.count + 1,
 			ping->tstat.ttl, ping->tstat.intervale); 
 	return (1);
 }
@@ -39,7 +39,7 @@ int	print_stat(t_ping *ping)
 int	print_summary(t_ping *ping)
 {
 
-	printf("PING %s (%s) %ld(%d) bytes of data\n", ping->host_name, ping->host_addr, sizeof(t_packet), ping->pstat.size);
+	printf("PING %s (%s) %ld(%d) bytes of data.\n", ping->host_name, ping->host_addr, sizeof(t_packet), ping->pstat.size);
 	return (1);
 }
 
