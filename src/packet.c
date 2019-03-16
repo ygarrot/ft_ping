@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:45:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 20:20:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 11:23:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		set_packet(t_packet *pckt, t_ping *ping)
 	static int msg_count = 0;
 	int	i;
 
+	ft_bzero(pckt, sizeof(t_packet));
 	pckt->hdr.type = ICMP_ECHO;
 	pckt->hdr.un.echo.id = getpid();
 	for (i = 0; i < ping->pstat.size - 1; i++ ) 
@@ -24,9 +25,5 @@ int		set_packet(t_packet *pckt, t_ping *ping)
 	pckt->msg[i] = 0;
 	pckt->hdr.un.echo.sequence = msg_count++;
 	pckt->hdr.checksum  = checksum(pckt, sizeof(t_packet));
-	/* pckt->hdr.checksum = checksum(&pckt->hdr, sizeof(t_icmphdr)); */ 
-	/* pckt->hdr.checksum += checksum(pckt->msg, */ 
-/* ping->pstat.size); */ 
-	ft_printf("%d\n", checksum);
 	return (1);
 }

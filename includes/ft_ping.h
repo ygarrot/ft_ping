@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:18:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 11:22:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct	s_packet
 {
 	t_icmphdr	hdr;
 	/* char		*msg; */
-	char		msg[56];
+	char		msg[PACKET_SIZE_DEFAULT - sizeof(t_icmphdr)];
 }				t_packet;
 
 /* int		ping_send(void *data, int socket); */

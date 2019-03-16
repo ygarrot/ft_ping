@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 17:10:14 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:03:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 11:22:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	ping_ctor(t_ping *ping)
 	ping->tstat.ttl = TTL_DEFAULT;
 	ping->tstat.timeout = DEFAULT_TIMEOUT;
 	ping->tstat.delay = 1.0;
-	func_tab(ping);
+	/* func_tab(ping); */
 	ping->pstat.size -= sizeof(t_icmphdr);
 	/* ping->packet.msg = ft_memalloc(ping->pstat.size); */
-	ft_printf("%d\n", ping->tstat.intervale);
-	ft_printf("%d\n", ping->tstat.timeout);
-	printf("%Lf\n", ping->tstat.delay);
-	ft_printf("%d\n", ping->tstat.ttl);
-	ft_printf("%d\n", ping->pstat.count_max);
-	ft_printf("%d\n", ping->tstat.deadline);
+	/* ft_printf("%d\n", ping->tstat.intervale); */
+	/* ft_printf("%d\n", ping->tstat.timeout); */
+	/* printf("%Lf\n", ping->tstat.delay); */
+	/* ft_printf("%d\n", ping->tstat.ttl); */
+	/* ft_printf("%d\n", ping->pstat.count_max); */
+	/* ft_printf("%d\n", ping->tstat.deadline); */
 	/* ft_printf("%d\n", ping->tstat.intervale); */
 }
 

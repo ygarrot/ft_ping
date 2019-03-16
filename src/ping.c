@@ -6,23 +6,21 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:15:13 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/16 11:24:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 
-int		ping_send(t_packet *data, int socket, t_ping *ping)
+int		ping_send(t_packet *pckt, int socket, t_ping *ping)
 {
-	if (sendto(socket, data,
-			sizeof(t_packet),
-			   /* ping->pstat.size + sizeof(t_icmphdr) */
+	if (sendto(socket, pckt,
+				sizeof(t_packet),
 				0, (t_sockaddr*)ping->sockaddr,
 				ping->sockaddr_len ) <= 0) 
 	{ 
 		perror("sendto");
 		ft_exit("\nPacket Sending Failed!\n", EXIT_FAILURE); 
-		/* flag=0; */ 
 	} 
 	ping->pstat.send++;
 	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->pstat.send)
@@ -31,21 +29,21 @@ int		ping_send(t_packet *data, int socket, t_ping *ping)
 }
 
 /*
-struct iovec {                     Scatter/gather array items 
-	void  *iov_base;               Starting address 
-	size_t iov_len;                Number of bytes to transfer 
-};
+   struct iovec {                     Scatter/gather array items 
+   void  *iov_base;               Starting address 
+   size_t iov_len;                Number of bytes to transfer 
+   };
 
-struct msghdr {
-	void         *msg_name;        optional address 
-	socklen_t     msg_namelen;     size of address 
-	struct iovec *msg_iov;         scatter/gather array 
-	size_t        msg_iovlen;      # elements in msg_iov 
-	void         *msg_control;     ancillary data, see below 
-	size_t        msg_controllen;  ancillary data buffer len 
-	int           msg_flags;       flags on received message 
-};
-*/
+   struct msghdr {
+   void         *msg_name;        optional address 
+   socklen_t     msg_namelen;     size of address 
+   struct iovec *msg_iov;         scatter/gather array 
+   size_t        msg_iovlen;      # elements in msg_iov 
+   void         *msg_control;     ancillary data, see below 
+   size_t        msg_controllen;  ancillary data buffer len 
+   int           msg_flags;       flags on received message 
+   };
+   */
 
 int		ping_receive(int sockfd, t_ping *ping)
 {
