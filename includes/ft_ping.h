@@ -6,24 +6,23 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 15:44:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/17 12:05:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PING_H
-#define FT_PING_H
+# define FT_PING_H
 
-#include "debug.h"
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
-#include <stdio.h>
-#include <netdb.h>
-#include <sys/socket.h>
+# include <stdio.h>
+# include <netdb.h>
+# include <sys/socket.h>
 # include <sys/types.h>
 
 # include <sys/uio.h>
 
-#include <signal.h>
+# include <signal.h>
 
 # include <unistd.h>
 
@@ -35,14 +34,14 @@
 # include <sys/socket.h>
 # include <netdb.h>
 # include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
+# include <netinet/ip_icmp.h>
 
-#define PING_BAD_COUNT "ping: bad number of packets to transmit."
-#define BUFF_S 1500
-#define PACKET_SIZE_DEFAULT 64
-#define DEFAULT_TIMEOUT 1
-#define DEFAULT_DELAY 1.0
-#define TTL_DEFAULT 64
+# define PING_BAD_COUNT "ping: bad number of packets to transmit."
+# define BUFF_S 1500
+# define PACKET_SIZE_DEFAULT 64
+# define DEFAULT_TIMEOUT 1
+# define DEFAULT_DELAY 1.0
+# define TTL_DEFAULT 64
 # define SEND_ERROR "ERROR SEND ERROR\n"
 # define RECV_ERROR "ERROR RECV ERROR\n"
 # define REQUEST_OK "OK\n"
@@ -58,7 +57,7 @@
 # define BIND_ERROR "ERROR BIND ERROR\n"
 # define SOCKET_ERROR "ERROR SOCKET ERROR\n"
 # define ERROR_CODE -1
-
+#define PORT_TMP 12
 #define OPT_STR "cdinqsStTvwWh"
 
 enum {
@@ -91,15 +90,11 @@ typedef struct hostent t_hostent;
 typedef struct addrinfo	t_addrinfo;
 int				ip_version(const char *src);
 
-
 typedef struct	s_packet
 {
 	t_icmphdr	hdr;
-	/* char		*msg; */
 	char		msg[PACKET_SIZE_DEFAULT - sizeof(t_icmphdr)];
 }				t_packet;
-
-/* int		ping_send(void *data, int socket); */
 
 typedef struct s_packet_stat
 {
@@ -110,7 +105,6 @@ typedef struct s_packet_stat
 	int		count_max;
 	int		sndbuff;
 }				t_packet_stat;
-#define PORT_TMP 12
 
 typedef struct s_time_stat
 {
@@ -146,37 +140,35 @@ typedef struct	s_ping
 	int				port;
 }				t_ping;
 
-extern t_ping *g_ping;
-void	stop_loop(int signal);
-void	ping_ctor(t_ping *ping);
-void	ping_dtor(t_ping *ping);
-void	func_tab(t_ping *ping);
-void	set_intervale(t_ping *ping, char *value);
-void	set_timeout(t_ping *ping, char *value);
-void	set_deadline(t_ping *ping, char *value);
-void	set_packetsize(t_ping *ping, char *value);
-void	set_countmax(t_ping *ping, char *value);
-void	set_sndbuff(t_ping *ping, char *value);
-void	set_ttl(t_ping *ping, char *value);
-void	display_help(t_ping *ping, char *value);
+unsigned short	checksum(void *b, int len);
+double			timeval_to_double(t_timeval last_time, t_timeval current_time);
+double			intervale(void);
 
-int		set_time_stat(t_ping *ping);
-int	print_ping(t_ping *ping);
-int	print_stat(t_ping *ping);
-double timeval_to_double(t_timeval last_time, t_timeval current_time);
-int		ping_send(t_packet *data, int socket, t_ping *ping);
-unsigned short checksum(void *b, int len) ;
-int		set_packet(t_packet *pckt, t_ping *ping);
+void			stop_loop(int signal);
+void			ping_ctor(t_ping *ping);
+void			ping_dtor(t_ping *ping);
+void			func_tab(t_ping *ping);
+void			set_intervale(t_ping *ping, char *value);
+void			set_timeout(t_ping *ping, char *value);
+void			set_deadline(t_ping *ping, char *value);
+void			set_packetsize(t_ping *ping, char *value);
+void			set_countmax(t_ping *ping, char *value);
+void			set_sndbuff(t_ping *ping, char *value);
+void			set_ttl(t_ping *ping, char *value);
+void			display_help(t_ping *ping, char *value);
+
+int				set_time_stat(t_ping *ping);
+int				print_ping(t_ping *ping);
+int				print_stat(t_ping *ping);
+int				ping_send(t_packet *data, int socket, t_ping *ping);
+int				set_packet(t_packet *pckt, t_ping *ping);
 int				set_socket(int is_ipv4);
-t_sockaddr		*get_sock_addr(char *addr, int port, int is_serv);
-t_sockaddr_in6	*get_ipv6_addr(char *address, int port, t_sockaddr_in6 *ss);
-t_sockaddr_in	*get_ipv4_addr(char *address, int port, t_sockaddr_in *ss, int addrtype);
-int		ping_receive(int sockfd, t_ping *ping);
-int		ping_loop(t_ping *ping);
-int	check_addr(t_ping *ping);
-double intervale(void);
-int wait_for (double sec);
-int	print_summary(t_ping *ping);
-int		reverse_dns_lookup(t_ping *ping);
+int				ping_receive(int sockfd, t_ping *ping);
+int				ping_loop(t_ping *ping);
+int				check_addr(t_ping *ping);
+int				wait_for (double sec);
+int				print_summary(t_ping *ping);
+int				reverse_dns_lookup(t_ping *ping);
 
+extern t_ping *g_ping;
 #endif

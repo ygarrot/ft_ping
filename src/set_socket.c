@@ -6,11 +6,22 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:21:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 17:37:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/17 12:06:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
+
+int				set_socket(int is_ipv4)
+{
+	int			sock;
+
+	if ((sock = socket(is_ipv4 ? AF_INET
+		: AF_INET6, SOCK_RAW, IPPROTO_ICMP)) < -1)
+		ft_exit(SOCKET_ERROR, EXIT_FAILURE);
+	return (sock);
+}
+
 
 int		reverse_dns_lookup(t_ping *ping)
 {
@@ -58,7 +69,6 @@ int	create_socket(t_ping *ping, int is_ipv4)
 **     };
 */
 
-#define PORT_TMP 12
 
 int	check_addr(t_ping *ping)
 {
@@ -70,8 +80,8 @@ int	check_addr(t_ping *ping)
 	tmp.ai_family = PF_UNSPEC;
 	tmp.ai_socktype = SOCK_RAW;
 	tmp.ai_flags |= AI_CANONNAME;
-	if (getaddrinfo(ping->host_name, NULL, &tmp, &ping->host_entity)
-!= 0)
+	if (getaddrinfo(ping->host_name, NULL,
+		&tmp, &ping->host_entity) != 0)
 	{
 		printf("ping: Name or Service not known\n");
 		return (ERROR_CODE);

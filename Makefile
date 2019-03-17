@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2019/03/16 17:33:20 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/03/17 11:49:37 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME = ft_ping
 
 FLAGS = -Wall -Werror -Wextra
 FLAGS += -g3
+FLAGS += -Wunused
 # FLAGS += -fsanitize=address,undefined
 SRC_DIR = src
 
@@ -28,14 +29,12 @@ SRC =\
 	 setopt.c\
 	 setopt2.c\
 	 print.c\
-	 fill_ip.c\
 	 packet.c\
 	 checksum.c\
 	 ip_version.c\
 	 main.c\
 	 ping.c\
 	 set_socket.c\
-	 socket_creation.c\
 	 time.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))

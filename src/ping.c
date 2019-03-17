@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 17:37:58 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/17 11:47:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,29 @@ int		ping_send(t_packet *pckt, int socket, t_ping *ping)
 	if (sendto(socket, pckt,
 				sizeof(t_packet),
 				0, (t_sockaddr*)ping->sockaddr,
-				ping->sockaddr_len ) <= 0) 
-	{ 
+				ping->sockaddr_len ) <= 0)
+	{
 		ft_exit("connect: invalid argument", 1);
 		return (ERROR_CODE);
-	} 
+	}
 	ping->pstat.send++;
 	return (1);
 }
 
 /*
-   struct iovec {                     Scatter/gather array items 
-   void  *iov_base;               Starting address 
-   size_t iov_len;                Number of bytes to transfer 
+   struct iovec {                     Scatter/gather array items
+   void  *iov_base;               Starting address
+   size_t iov_len;                Number of bytes to transfer
    };
 
    struct msghdr {
-   void         *msg_name;        optional address 
-   socklen_t     msg_namelen;     size of address 
-   struct iovec *msg_iov;         scatter/gather array 
-   size_t        msg_iovlen;      # elements in msg_iov 
-   void         *msg_control;     ancillary data, see below 
-   size_t        msg_controllen;  ancillary data buffer len 
-   int           msg_flags;       flags on received message 
+   void         *msg_name;        optional address
+   socklen_t     msg_namelen;     size of address
+   struct iovec *msg_iov;         scatter/gather array
+   size_t        msg_iovlen;      # elements in msg_iov
+   void         *msg_control;     ancillary data, see below
+   size_t        msg_controllen;  ancillary data buffer len
+   int           msg_flags;       flags on received message
    };
    */
 
@@ -61,15 +61,10 @@ int		ping_receive(int sockfd, t_ping *ping)
 	/* msg.msg_accrights    = (char *)&pass_sd; */
 	/* msg.msg_accrightslen = sizeof(pass_sd); */
 	if (recvmsg(sockfd, &msg, MSG_WAITALL) < 0)
-	{ 
+	{
 		ft_printf("Packet receive failed!\n");
 		return (ERROR_CODE);
 	}
 	ping->pstat.rcv++;
 	return (1);
-}
-
-void	send_ping()
-{
-	return ;
 }

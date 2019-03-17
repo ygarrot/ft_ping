@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 14:49:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 16:02:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/17 11:49:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /*
 struct timeval {
-    time_t      tv_sec;      seconds 
-    suseconds_t tv_usec;     microseconds 
+    time_t      tv_sec;      seconds
+    suseconds_t tv_usec;     microseconds
 };
 
 struct timezone {
-    int tz_minuteswest;      minutes west of Greenwich 
-    int tz_dsttime;          type of DST correction 
+    int tz_minuteswest;      minutes west of Greenwich
+    int tz_dsttime;          type of DST correction
 };
 The tz_dsttime field has never been used under Linux. Thus, the following is purely of historic interest.
 */
@@ -63,7 +63,7 @@ int		set_time_stat(t_ping *ping)
 	ping->tstat.count++;
 	ping->tstat.all += time.intervale;
 	gettimeofday(&ping->tstat.current, 0);
-	if (time.deadline > 0 
+	if (time.deadline > 0
 	&& timeval_to_double(time.start, time.current) >= time.deadline)
 		stop_loop(2);
 	if (ping->pstat.count_max > 0 && ping->pstat.count_max < ping->tstat.count)
