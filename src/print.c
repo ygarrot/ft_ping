@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:56:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/17 11:47:53 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/03/17 12:24:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	print_ping(t_ping *ping)
 
 int	print_stat(t_ping *ping)
 {
-	printf("\n--- %s ping statistics ---\n", ping->host_name);
+	printf("\n--- %s ping statistics ---\n", ping->host_entity->ai_canonname);
 	printf("%d packets transmitted, %d received, %d%% packet loss, time %.0Lf ms\n",
 			ping->pstat.send, ping->pstat.rcv,
 			(int)(((double)(ping->pstat.send - ping->pstat.rcv) / ping->pstat.count) * 100),
 			ping->tstat.all);
-	printf("rtt min/avg/max/mdev = %Lf/%Lf/%Lf/%Lf ms\n",
+	printf("rtt min/avg/max/mdev = %.3Lf/%.3Lf/%.3Lf/%.3Lf ms\n",
 		ping->tstat.min, ping->tstat.avg, ping->tstat.max, ping->tstat.mdev);
 	return (1);
 }
@@ -40,7 +40,8 @@ int	print_stat(t_ping *ping)
 int	print_summary(t_ping *ping)
 {
 
-	printf("PING %s (%s) %ld(%d) bytes of data.\n", ping->host_name, ping->host_addr, sizeof(t_packet), ping->pstat.size);
+	printf("PING %s (%s) %ld(%d) bytes of data.\n",
+	ping->host_entity->ai_canonname, ping->host_addr, sizeof(t_packet), ping->pstat.size);
 	return (1);
 }
 
