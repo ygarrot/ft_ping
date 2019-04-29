@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 18:04:25 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:21:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,11 +206,12 @@ int				is_directory_str(char *name);
 int				is_regular_file(int fd);
 int				ft_swap_int(int num);
 int				ft_getopt(int ac, char *av[], const char *optst, int *nb);
-int				ft_getoptvalue(int ac, char *av[], const char *optst, char **opts);
+int				ft_getoptvalue(int ac, char *av[],
+								const char *optst, char **opts);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 int				ft_exit(char *str, int code);
 
-double	ft_std(double *array, int len);
-double	ft_mean(double *array, int len);
+double			ft_std(double *array, int len);
+double			ft_mean(double *array, int len);
 #endif

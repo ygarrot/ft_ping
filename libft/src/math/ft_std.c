@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 15:32:43 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 15:33:03 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:23:35 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double	ft_std(double *array, int len)
 {
-	int	i;
-	double sum;
+	double	sum;
 	double	std;
-	int	mean;
+	int		mean;
+	int		i;
 
 	i = len;
 	sum = 0.0;

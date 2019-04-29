@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:58:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/15 21:04:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:24:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_getoptvalue(int argc, char *argv[],
 			}
 		}
 		else
-			opts[last] = argv[i] ;
+			opts[last] = argv[i];
 	}
 	return (ret);
 }
