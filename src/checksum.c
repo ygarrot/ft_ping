@@ -6,17 +6,17 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:48:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/17 11:46:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:53:18 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 
-unsigned short checksum(void *b, int len)
+unsigned short	checksum(void *b, int len)
 {
-	unsigned short *buf;
-	unsigned int sum;
-	unsigned short result;
+	unsigned short	*buf;
+	unsigned int	sum;
+	unsigned short	result;
 
 	sum = 0;
 	buf = b;
@@ -32,4 +32,3 @@ unsigned short checksum(void *b, int len)
 	result = ~sum;
 	return (result);
 }
-

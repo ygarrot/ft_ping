@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:27:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/16 14:16:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:07:40 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	set_ttl(t_ping *ping, char *value)
 {
 	if (ft_atoi(value) > 255)
-		return;
+		return ;
 	ping->tstat.ttl = ft_atoi(value);
 }
 
@@ -36,12 +36,10 @@ void	set_sndbuff(t_ping *ping, char *value)
 ** -s
 */
 
-
 void	set_packetsize(t_ping *ping, char *value)
 {
 	ping->pstat.size = ft_atoi(value);
 }
-
 
 /*
 ** -c
@@ -65,5 +63,3 @@ void	set_intervale(t_ping *ping, char *value)
 {
 	ping->tstat.delay = atof(value);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/03/17 12:05:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:18:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,9 @@
 # define DEFAULT_TIMEOUT 1
 # define DEFAULT_DELAY 1.0
 # define TTL_DEFAULT 64
-# define SEND_ERROR "ERROR SEND ERROR\n"
-# define RECV_ERROR "ERROR RECV ERROR\n"
-# define REQUEST_OK "OK\n"
-# define REQUEST_ERROR "ERROR\n"
-# define CLOSE_ERROR "ERROR ON CLOSE\n"
-# define OPEN_ERROR "ERROR NO SUCH FILE OR DIRECTORY\n"
-# define OOM_DEVICE "ERROR NO SPACE LEFT ON DEVICE\n"
-# define PIPE_ERR "ERROR ON PIPE\n"
-# define FORK_ERR "ERROR ON FORK\n"
-# define CLOSE_ERR "ERROR ON CLOSE\n"
-# define EXECV_ERR "ERROR ON EXECV\n"
-# define READ_ERR "ERROR ON READ\n"
-# define BIND_ERROR "ERROR BIND ERROR\n"
-# define SOCKET_ERROR "ERROR SOCKET ERROR\n"
 # define ERROR_CODE -1
-#define PORT_TMP 12
-#define OPT_STR "cdinqsStTvwWh"
+# define PORT_TMP 12
+# define OPT_STR "cdinqsStTvwWh"
 
 enum {
 	COUNT = (1 << 0),
@@ -76,18 +62,18 @@ enum {
 	HELP = (1 << 12)
 };
 
-typedef struct timeval	t_timeval;
-typedef struct timezone	t_timezone;
-typedef struct sockaddr	t_sockaddr;
+typedef struct timeval		t_timeval;
+typedef struct timezone		t_timezone;
+typedef struct sockaddr		t_sockaddr;
 typedef struct sockaddr6	t_sockaddr6;
 typedef struct sockaddr_in6	t_sockaddr_in6;
 typedef struct sockaddr_in	t_sockaddr_in;
-typedef struct protoent	t_protoent;
-typedef struct ip	t_ip;
-typedef struct tcphdr t_tcphdr;
-typedef struct icmphdr t_icmphdr;
-typedef struct hostent t_hostent;
-typedef struct addrinfo	t_addrinfo;
+typedef struct protoent		t_protoent;
+typedef struct ip			t_ip;
+typedef struct tcphdr		t_tcphdr;
+typedef struct icmphdr		t_icmphdr;
+typedef struct hostent		t_hostent;
+typedef struct addrinfo		t_addrinfo;
 int				ip_version(const char *src);
 
 typedef struct	s_packet
@@ -96,7 +82,7 @@ typedef struct	s_packet
 	char		msg[PACKET_SIZE_DEFAULT - sizeof(t_icmphdr)];
 }				t_packet;
 
-typedef struct s_packet_stat
+typedef struct	s_packet_stat
 {
 	int		size;
 	int		send;
@@ -106,10 +92,10 @@ typedef struct s_packet_stat
 	int		sndbuff;
 }				t_packet_stat;
 
-typedef struct s_time_stat
+typedef struct	s_time_stat
 {
-	t_timeval	start;
-	t_timeval	current;
+	t_timeval			start;
+	t_timeval			current;
 	long double			intervale;
 	long double			delay;
 	long double			min;
@@ -126,7 +112,7 @@ typedef struct s_time_stat
 typedef struct	s_ping
 {
 	t_sockaddr		*sockaddr;
-	t_addrinfo		*host_entity; 
+	t_addrinfo		*host_entity;
 	t_packet		packet;
 	t_packet_stat	pstat;
 	t_time_stat		tstat;
