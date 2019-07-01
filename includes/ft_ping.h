@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 12:53:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/04/29 16:18:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/07/01 17:14:31 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include <netinet/ip_icmp.h>
 
 # define PING_BAD_COUNT "ping: bad number of packets to transmit."
+#define SOCKET_ERROR "socket error"
 # define BUFF_S 1500
 # define PACKET_SIZE_DEFAULT 64
 # define DEFAULT_TIMEOUT 1
