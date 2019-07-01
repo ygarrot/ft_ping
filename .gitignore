@@ -54,8 +54,5 @@ dkms.conf
 # vim swp
 *.swp
 *.swo
+ft_ping
 
-test 7
-unit_test
-their 
-mine
